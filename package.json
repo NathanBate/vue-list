@@ -1,13 +1,16 @@
 {
-  "name": "vue-list",
-  "version": "0.0.0",
+  "name": "@nathanbate/vue-list",
+  "version": "0.0.3",
+  "description": "a vuejs based searchable, pagination enabled list",
+  "main": "src/App.vue",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 5050"
   },
   "dependencies": {
-    "vue": "^3.2.33"
+    "vue": "^3.2.33",
+    "vue-mobile-detection": "^2.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",

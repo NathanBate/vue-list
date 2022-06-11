@@ -1,47 +1,83 @@
 
 <template>
-  <div>
-    <div><input type="text" v-model="searchPhrase" /> </div>
-    <div class="nathanbate-list-header-row"
-          :style="{'padding-top':rowPad,'padding-bottom':rowPad, 'gap':cellGap }"
-          style="display: flex;">
-      <span v-for="(column, index) in config.columns"
-            :key="'header-'+index"
-            style="display: inline-block;"
-            :style="{ 'width': column.width === -1 ? 'auto' : column.width + 'rem',
-              'padding-left':cellPad,'padding-right':cellPad}">
-        {{ column.label }}
-      </span>
-    </div>
-    <div class="nathanbate-list-data-rows">
-      <div v-for="(item, rowIndex) in filteredItems"
-            :key="'listItem-'+rowIndex"
-            :style="{'padding-top':rowPad,'padding-bottom':rowPad, 'gap':cellGap }"
-            style="display: flex">
-        <span v-for="(column, columnIndex) in config.columns"
-              :key="'header-'+columnIndex"
-              style="display: inline-block;"
-              :style="{'width': config.columns[columnIndex].width === -1 ? 'auto' : config.columns[columnIndex].width + 'rem',
-                'padding-left':cellPad,'padding-right':cellPad}">
-          <a v-if="column.link" :href="item.link">
-            <span>{{ item[ config.columns[columnIndex].key ] }}</span>
-          </a>
-          <span v-else>{{ item[ config.columns[columnIndex].key ] }}</span>
-        </span>
+  <!-- wrapper -->
+  <div class="nathanbate-vue-list-wrapper" :class="theme">
+
+    <!-- search box, clear search, and action button -->
+    <div style="display: flex;">
+      <input class="nathanbate-vue-list-search-box" placeholder="Search" type="text" v-model="searchPhrase" />
+      <div class="nathanbate-vue-list-clear-search">
+        <a v-if="searchPhrase.length > 0" @click="clearSearch" style="text-decoration: underline">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 48 48" style="fill:gray;"><path d="M12.45 37.95 10.05 35.55 21.6 24 10.05 12.45 12.45 10.05 24 21.6 35.55 10.05 37.95 12.45 26.4 24 37.95 35.55 35.55 37.95 24 26.4Z"/></svg>
+        </a>
       </div>
+      <div class="nathanbate-vue-list-search-bar-spacer"></div>
+      <a class="nathanbate-vue-list-action-button" v-if="config.hasOwnProperty('actionButton')" :href="config.actionButton.link">{{ config.actionButton.label }}</a>
     </div>
-    <div class="nathanbate-list-pagination-buttons" style="display: flex;" :style="{'gap': cellGap}">
-      <a v-if="pageIndex !== 1" @click="pageIndex=1">First</a>
-      <a v-if="pageIndex !== 1" @click="pageIndex=pageIndex-1">Prev</a>
-      <a v-if="pageIndex !== numberOfPages" @click="pageIndex=pageIndex+1">Next</a>
-      <a v-if="pageIndex !== numberOfPages" @click="pageIndex=numberOfPages">Last</a>
-    </div>
+
+    <!-- table -->
+    <table class="nathanbate-list-table">
+
+      <!-- Table Heading -->
+      <th
+          class="nathanbate-vue-list-table-heading"
+          v-for="(column, index) in config.columns"
+          :key="'header-'+index"
+          :style="{'width':column.width}"
+      >
+        {{ column.label }}
+      </th>
+
+      <!-- Table Rows -->
+      <tr class="nathanbate-vue-list-table-rows" v-for="(item, rowIndex) in filteredItems" :key="'listItem-'+rowIndex">
+        <td v-for="(column, columnIndex) in config.columns" :key="'header-'+columnIndex">
+          <a v-if="config.rowLinkable" :href="item.link" :target="config.hasOwnProperty('rowLinkTarget') ? config.rowLinkTarget : ''">
+              {{ item[ config.columns[columnIndex].key ] }}
+          </a>
+          <div v-else>
+            {{ item[ config.columns[columnIndex].key ] }}
+          </div>
+        </td>
+      </tr>
+
+      <!-- Table Footer -->
+      <tr class="nathanbate-vue-list-table-footer" :colspan="config.columns.length">
+        <td>
+          <div class="nathanbate-list-pagination-buttons" style="display: flex;">
+            <a @click="pageIndex !== 1 ? pageIndex=1 : '' " :style="{'text-decoration':pageIndex !== 1 ? 'underline' : 'none'}">First</a>
+            <a @click="pageIndex !== 1 ? pageIndex=pageIndex-1 : ''" :style="{'text-decoration': pageIndex !== 1 ? 'underline' : 'none'}">Prev</a>
+            <a @click="pageIndex !== numberOfPages ? pageIndex=pageIndex+1 :''" :style="{'text-decoration':pageIndex !== numberOfPages ? 'underline' : 'none'}">Next</a>
+            <a @click="pageIndex !== numberOfPages ? pageIndex=numberOfPages :''" :style="{'text-decoration': pageIndex !== numberOfPages ? 'underline' : 'none'}">Last</a>
+          </div>
+        </td>
+      </tr>
+
+    </table>
   </div>
 </template>
 
 <script>
+import DemoData from "./demo/data";
+import DemoConfig from "./demo/config";
+
 export default {
-  props: ['config', 'data'],
+  props: {
+    configProp: {
+      type: Object,
+      required: false,
+      default: null,
+    },
+    dataProp: {
+      type: Array,
+      required: false,
+      default: null
+    },
+    theme: {
+      type: String,
+      required: false,
+      default: 'nathanbate-vue-list-classic-theme',
+    }
+  },
   computed: {
     filteredItems() {
       if (this.searchPhrase.length > 3) {
@@ -65,10 +101,14 @@ export default {
   },
   data() {
     return {
+      data: null,
+      config: null,
       searchPhrase: '',
-      rowPad: '',
-      cellPad: '',
-      cellGap: '',
+      styles: {
+        rowPad: '',
+        cellPad: '',
+        cellGap: '',
+      },
       pageIndex: 1,
     }
   },
@@ -97,23 +137,40 @@ export default {
       } else {
         return true
       }
+    }, // paginating
+    clearSearch() {
+      this.searchPhrase = ''
+    },
+    initConfig() {
+      this.config.columns.forEach((column, index, array) => {
+        if (! column.hasOwnProperty("search")) {
+          this.config.columns[index].search = false
+        }
+        if (! column.hasOwnProperty("width")) {
+          this.config.columns[index].width = -1
+        }
+        if (! column.hasOwnProperty("link")) {
+          this.config.columns[index].link = false
+        }
+      })
     },
   },
   created() {
-    this.config.columns.forEach((column, index, array) => {
-      if (! column.hasOwnProperty("search")) {
-        this.config.columns[index].search = false
-      }
-      if (! column.hasOwnProperty("width")) {
-        this.config.columns[index].width = -1
-      }
-      if (! column.hasOwnProperty("link")) {
-        this.config.columns[index].link = false
+    this.configProp === null ? this.config = DemoConfig : this.config = this.configProp
+    this.dataProp === null ? this.data = DemoData : this.data = this.dataProp
+    this.initConfig()
+  },
+  mounted() {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.searchPhrase = ""
       }
     })
-    this.rowPad = this.config.rowPadding+'rem'
-    this.cellPad = this.config.cellPadding+'rem'
-    this.cellGap = this.config.cellGap+'rem'
-  }
+  },
 }
 </script>
+
+<style scoped>
+@import "styles/classic.css";
+@import "styles/sunrise.css";
+</style>
