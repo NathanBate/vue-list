@@ -5,9 +5,10 @@
 
     <!-- search box, clear search, and action button -->
     <div style="display: flex;">
-      <input class="nathanbate-vue-list-search-box" placeholder="Search" type="text" v-model="searchPhrase" />
-      <div class="nathanbate-vue-list-clear-search">
-        <a v-if="searchPhrase.length > 0" @click="clearSearch" style="text-decoration: underline">
+      <input id="nbSearchBox" class="nathanbate-vue-list-search-box" :placeholder="isMac === true ? 'Press &#8984; + k for Search' : 'Press CTRL + k for Search'" type="text" v-model="searchPhrase" />
+      <div class="nathanbate-vue-list-clear-search" style="display:flex">
+        <div v-if="searchPhrase.length > 0 && isMobile === false" style="font-size: 8pt; padding-top:6px; padding-right:4px; color:gray">ESC</div>
+        <a v-if="searchPhrase.length > 0" @click="clearSearch">
           <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 48 48" style="fill:gray;"><path d="M12.45 37.95 10.05 35.55 21.6 24 10.05 12.45 12.45 10.05 24 21.6 35.55 10.05 37.95 12.45 26.4 24 37.95 35.55 35.55 37.95 24 26.4Z"/></svg>
         </a>
       </div>
@@ -59,6 +60,7 @@
 <script>
 import DemoData from "./demo/data";
 import DemoConfig from "./demo/config";
+import { detectMobile } from "vue-mobile-detection/src/components/VueMobileDetection.js"
 
 export default {
   props: {
@@ -103,7 +105,9 @@ export default {
     return {
       data: null,
       config: null,
+      isMobile: detectMobile(),
       searchPhrase: '',
+      isMac: '',
       styles: {
         rowPad: '',
         cellPad: '',
@@ -159,6 +163,9 @@ export default {
     this.configProp === null ? this.config = DemoConfig : this.config = this.configProp
     this.dataProp === null ? this.data = DemoData : this.data = this.dataProp
     this.initConfig()
+
+    let platform = navigator?.userAgentData?.platform || navigator?.platform || 'unknown'
+    this.isMac = platform.toUpperCase().indexOf('MAC')>=0
   },
   mounted() {
     document.addEventListener('keydown', (e) => {
@@ -166,6 +173,13 @@ export default {
         this.searchPhrase = ""
       }
     })
+
+    document.onkeydown = function(e) {
+      if (e.key === "k" && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        document.getElementById("nbSearchBox").focus()
+      }
+    };
   },
 }
 </script>
