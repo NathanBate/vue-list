@@ -12,19 +12,17 @@ export default {
             link: true,
             key: "name",
             search: true,
-            width: '50%',
         },
         {
             label: "Type",
             key: "type",
-            width: '15rem',
             search: true,
         },
         {
             label: "Random Number",
             link: true,
             key: "randomNumber",
-            search: true
+            search: true,
         }
     ]
 }
