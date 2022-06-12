@@ -5,7 +5,7 @@
 
     <!-- search box, clear search, and action button -->
     <div style="display: flex;">
-      <input id="nbSearchBox" class="nathanbate-vue-list-search-box" :placeholder="isMac === true ? 'Press &#8984; + k for Search' : 'Press CTRL + k for Search'" type="text" v-model="searchPhrase" />
+      <input id="nbSearchBox" class="nathanbate-vue-list-search-box" :placeholder="isMac === true ? 'Search &#8984; + k' : 'Search CTRL + k'" type="text" v-model="searchPhrase" />
       <div class="nathanbate-vue-list-clear-search" style="display:flex">
         <div v-if="searchPhrase.length > 0 && isMobile === false" style="font-size: 8pt; padding-top:6px; padding-right:4px; color:gray">ESC</div>
         <a v-if="searchPhrase.length > 0" @click="clearSearch">
