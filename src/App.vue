@@ -57,11 +57,12 @@
     <!-- Table Footer -->
     <tr class="nbvl-table-footer" >
       <td :colspan="config.columns.length">
-        <div class="nathanbate-list-pagination-buttons" style="display: flex;">
-          <a @click="pageIndex !== 1 ? pageIndex=1 : '' " :style="{'text-decoration':pageIndex !== 1 ? 'underline' : 'none'}">First</a>
-          <a @click="pageIndex !== 1 ? pageIndex=pageIndex-1 : ''" :style="{'text-decoration': pageIndex !== 1 ? 'underline' : 'none'}">Prev</a>
-          <a @click="pageIndex !== numberOfPages ? pageIndex=pageIndex+1 :''" :style="{'text-decoration':pageIndex !== numberOfPages ? 'underline' : 'none'}">Next</a>
-          <a @click="pageIndex !== numberOfPages ? pageIndex=numberOfPages :''" :style="{'text-decoration': pageIndex !== numberOfPages ? 'underline' : 'none'}">Last</a>
+        <div class="nathanbate-list-pagination-buttons">
+          <a @click="pageIndex !== 1 ? pageIndex=1 : '' " :style="{'background-color':pageIndex !== 1 ? '#d8dde3' : '#f3f7fc'}">First</a>
+          <a @click="pageIndex !== 1 ? pageIndex=pageIndex-1 : ''" :style="{'background-color': pageIndex !== 1 ? '#d8dde3' : '#f3f7fc'}">Prev</a>
+          <span>{{ pageIndex }}</span>
+          <a @click="pageIndex !== numberOfPages ? pageIndex=pageIndex+1 :''" :style="{'background-color':pageIndex !== numberOfPages ? '#d8dde3' : '#f3f7fc'}">Next</a>
+          <a @click="pageIndex !== numberOfPages ? pageIndex=numberOfPages :''" :style="{'background-color': pageIndex !== numberOfPages ? '#d8dde3' : '#f3f7fc'}">Last</a>
         </div>
       </td>
     </tr>
@@ -92,7 +93,7 @@ export default {
     theme: {
       type: String,
       required: false,
-      default: 'nbvl-classic-theme',
+      default: 'nbvl-craft-theme',
     }
   },
   components: {
@@ -221,6 +222,6 @@ export default {
 </script>
 
 <style scoped>
-@import "styles/classic.css";
+@import "styles/craft.css";
 @import "styles/sunrise.css";
 </style>

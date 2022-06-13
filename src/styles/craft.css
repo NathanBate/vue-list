@@ -1,19 +1,19 @@
-div.nbvl-classic-theme {
+div.nbvl-craft-theme {
 
 }
 
-div.nbvl-classic-theme > div {
+div.nbvl-craft-theme > div {
     margin: 16px 0px;
 }
 
-div.nbvl-classic-theme > div > div.nbvl-search-wrapper::before {
+div.nbvl-craft-theme > div > div.nbvl-search-wrapper::before {
     position: absolute;
     left: 8px;
     top: 8px;
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='20' width='20' viewBox='0 0 48 48' style='fill:gray;'%3E%3Cpath d='M39.8 42.3 26.55 29.1Q25.1 30.35 23.1 31.05Q21.1 31.75 18.85 31.75Q13.35 31.75 9.525 27.95Q5.7 24.15 5.7 18.75Q5.7 13.35 9.525 9.55Q13.35 5.75 18.75 5.75Q24.15 5.75 27.95 9.55Q31.75 13.35 31.75 18.75Q31.75 20.9 31.05 22.9Q30.35 24.9 29 26.65L42.3 39.8ZM18.8 28.35Q22.75 28.35 25.525 25.525Q28.3 22.7 28.3 18.75Q28.3 14.8 25.525 11.975Q22.75 9.15 18.8 9.15Q14.75 9.15 11.95 11.975Q9.15 14.8 9.15 18.75Q9.15 22.7 11.95 25.525Q14.75 28.35 18.8 28.35Z'/%3E%3C/svg%3E");
 }
 
-div.nbvl-classic-theme > div > div > input.nbvl-search-box {
+div.nbvl-craft-theme > div > div > input.nbvl-search-box {
     border-radius: 0.25rem;
     margin-right: 0.75rem;
     background-clip: border-box;
@@ -28,21 +28,21 @@ div.nbvl-classic-theme > div > div > input.nbvl-search-box {
     color: #394b60;
 }
 
-div.nbvl-classic-theme > div > div > div.nbvl-clear-search {
+div.nbvl-craft-theme > div > div > div.nbvl-clear-search {
     position: absolute;
     top: 8px;
     right:15px;
 }
 
-div.nbvl-classic-theme div div.nbvl-clear-search > a {
+div.nbvl-craft-theme div div.nbvl-clear-search > a {
     cursor: pointer;
 }
 
-div.nbvl-classic-theme div a {
+div.nbvl-craft-theme div a {
     text-decoration: none;
 }
 
-div.nbvl-classic-theme div a .nbvl-action-button {
+div.nbvl-craft-theme div a .nbvl-action-button {
     color:white;
     border-radius: .25rem;
     text-decoration: none;
@@ -53,11 +53,11 @@ div.nbvl-classic-theme div a .nbvl-action-button {
     background-color: #E12D39;
 }
 
-div.nbvl-classic-theme div a .nbvl-action-button:hover {
+div.nbvl-craft-theme div a .nbvl-action-button:hover {
     background-color: #b5222c;
 }
 
-div.nbvl-classic-theme > table.nbvl-table {
+div.nbvl-craft-theme > table.nbvl-table {
     width:100%;
     margin:0;
     border:0;
@@ -66,15 +66,15 @@ div.nbvl-classic-theme > table.nbvl-table {
 }
 
 
-div.nbvl-classic-theme table.nbvl-table thead tr th:first-child {
+div.nbvl-craft-theme table.nbvl-table thead tr th:first-child {
     border-top-left-radius: .25rem;
 }
 
-div.nbvl-classic-theme table.nbvl-table thead tr th:last-child {
+div.nbvl-craft-theme table.nbvl-table thead tr th:last-child {
     border-top-right-radius: .25rem;
 }
 
-div.nbvl-classic-theme table.nbvl-table thead tr th {
+div.nbvl-craft-theme table.nbvl-table thead tr th {
     background-color: #f3f7fc;
     color: #3f4d5a;
     font-weight: bold;
@@ -85,38 +85,48 @@ div.nbvl-classic-theme table.nbvl-table thead tr th {
     margin:0;
 }
 
-div.nbvl-classic-theme > table.nbvl-table tbody {
+div.nbvl-craft-theme > table.nbvl-table tbody {
 
 }
 
-div.nbvl-classic-theme > table.nbvl-table tbody tr {
+div.nbvl-craft-theme > table.nbvl-table tbody tr {
     border-top: 1px white solid;
     background-color: #fff;
 }
 
-div.nbvl-classic-theme > table.nbvl-table tbody tr td {
+div.nbvl-craft-theme > table.nbvl-table tbody tr td {
     word-wrap: break-word;
     text-align: left;
     vertical-align: middle;
     font-family: sans-serif;
 }
 
-div.nbvl-classic-theme > table.nbvl-table tbody tr:hover {
+div.nbvl-craft-theme > table.nbvl-table tbody tr td a div,
+div.nbvl-craft-theme > table.nbvl-table tbody tr td a,
+div.nbvl-craft-theme > table.nbvl-table tbody tr td,
+div.nbvl-craft-theme > table.nbvl-table tbody tr,
+div.nbvl-craft-theme > table.nbvl-table tbody,
+div.nbvl-craft-theme > table.nbvl-table
+{
+    word-break: break-all;
+}
+
+div.nbvl-craft-theme > table.nbvl-table tbody tr:hover {
     background-color: #f3f7fc;
 }
 
-div.nbvl-classic-theme > table.nbvl-table tbody tr td .nbvl-table-cell-link {
+div.nbvl-craft-theme > table.nbvl-table tbody tr td .nbvl-table-cell-link {
     text-decoration: none;
 }
 
-div.nbvl-classic-theme table.nbvl-table tbody tr.nbvl-table-footer {
+div.nbvl-craft-theme table.nbvl-table tbody tr.nbvl-table-footer {
 }
 
-div.nbvl-classic-theme table.nbvl-table tbody tr.nbvl-table-footer {
+div.nbvl-craft-theme table.nbvl-table tbody tr.nbvl-table-footer {
     background: transparent;
 }
 
-div.nbvl-classic-theme table.nbvl-table tbody tr.nbvl-table-footer td {
+div.nbvl-craft-theme table.nbvl-table tbody tr.nbvl-table-footer td {
     background-color: #f3f7fc;
     color: #3f4d5a;
     font-family: sans-serif;
@@ -127,4 +137,24 @@ div.nbvl-classic-theme table.nbvl-table tbody tr.nbvl-table-footer td {
     border-bottom-left-radius: .25rem;
     border-bottom-right-radius: .25rem;
 }
+
+div.nbvl-craft-theme table.nbvl-table tbody tr.nbvl-table-footer td div {
+    display: flex;
+    justify-content: center;
+}
+
+div.nbvl-craft-theme table.nbvl-table tbody tr.nbvl-table-footer td div a,
+div.nbvl-craft-theme table.nbvl-table tbody tr.nbvl-table-footer td div span {
+    padding: 4px 8px;
+    font-size:8pt;
+}
+
+div.nbvl-craft-theme table.nbvl-table tbody tr.nbvl-table-footer td div a {
+    cursor: pointer;
+    background-color: #d8dde3;
+    padding-top:5px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
 
