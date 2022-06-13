@@ -1,8 +1,12 @@
 {
   "name": "@nathanbate/vue-list",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "a vuejs based searchable, pagination enabled list",
   "main": "src/App.vue",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NathanBate/vue-list"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
