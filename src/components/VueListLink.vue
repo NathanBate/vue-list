@@ -1,5 +1,5 @@
 <template>
-  <InertiaLink v-if="inertiaLinks === true" :href="href"><slot/></InertiaLink>
+  <InertiaLink v-if="inertiaLinks === true" :href="href"><!-- inertia link --><slot/></InertiaLink>
   <a v-else :href="href"><slot/></a>
 </template>
 
@@ -11,9 +11,13 @@ export default {
     href: {
       required: true,
       type: String
+    },
+    inertiaLinks: {
+      required: false,
+      default: false,
+      type: Boolean
     }
   },
-  inject: ['inertiaLinks'],
   components: {
     InertiaLink : Link
   },

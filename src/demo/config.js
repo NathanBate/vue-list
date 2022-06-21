@@ -2,6 +2,7 @@ export default {
     showList: true,
     itemsPerPage: 10,
     rowLinkable: true,
+    inertiaLinks: false,
     actionButton: {
         label: 'New',
         link: 'https://inertiajs.com'

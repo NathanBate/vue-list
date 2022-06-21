@@ -17,7 +17,7 @@
       <div class="nbvl-search-bar-spacer"></div>
 
       <!-- action button -->
-      <Link v-if="config.hasOwnProperty('actionButton')" :href="config.actionButton.link">
+      <Link v-if="config.hasOwnProperty('actionButton')" :href="config.actionButton.link" :inertia-links="inertiaLinks">
         <div class="nbvl-action-button">{{ config.actionButton.label }}</div>
       </Link>
     </div>
@@ -43,7 +43,7 @@
     <!-- Table Rows -->
     <tr class="nbvl-table-rows" v-for="(item, rowIndex) in filteredItems" :key="'listItem-'+rowIndex">
       <td v-for="(column, columnIndex) in config.columns" :key="'header-'+columnIndex">
-        <Link v-if="config.rowLinkable" class="nbvl-table-cell-link" :href="item.link" :target="config.hasOwnProperty('rowLinkTarget') ? config.rowLinkTarget : ''">
+        <Link v-if="config.rowLinkable" class="nbvl-table-cell-link" :href="item.link" :target="config.hasOwnProperty('rowLinkTarget') ? config.rowLinkTarget : ''" :inertia-links="inertiaLinks">
           <div style="padding: 14px; display: inline-block; width: 100%; color:black">
             {{ item[ config.columns[columnIndex].key ] }}
           </div>
@@ -119,6 +119,9 @@ export default {
     numberOfPages() {
       return Math.ceil(this.data.length / this.config.itemsPerPage)
     },
+    usingInertiaLinks() {
+      return this.inertiaLinks
+    },
   },
   data() {
     return {
@@ -134,11 +137,6 @@ export default {
         cellGap: '',
       },
       pageIndex: 1,
-    }
-  },
-  provide() {
-    return {
-      inertiaLinks: this.inertiaLinks
     }
   },
   methods: {
