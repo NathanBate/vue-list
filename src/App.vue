@@ -5,22 +5,34 @@
 
     <!-- search box, clear search, and action button -->
     <div style="display: flex;">
+
+      <!-- search box -->
       <div class="nbvl-search-wrapper" style="width:100%; padding-right:10px; position: relative;">
         <input id="nbSearchBox" class="nbvl-search-box" :placeholder="isMac === true ? 'Search &#8984; + k' : 'Search CTRL + k'" type="text" v-model="searchPhrase" />
         <div class="nbvl-clear-search" style="display:flex">
-          <div v-if="searchPhrase.length > 0 && isMobile === false" style="font-size: 8pt; padding-top:6px; padding-right:4px; color:gray">ESC</div>
+          <div v-if="searchPhrase.length > 0 && isMobile === false" style="display: flex; align-items: center; font-size: 8pt; padding-right:4px; color:gray">
+            <span style="position: relative;">ESC</span>
+          </div>
           <a v-if="searchPhrase.length > 0" @click="clearSearch">
             <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 48 48" style="fill:gray;"><path d="M12.45 37.95 10.05 35.55 21.6 24 10.05 12.45 12.45 10.05 24 21.6 35.55 10.05 37.95 12.45 26.4 24 37.95 35.55 35.55 37.95 24 26.4Z"/></svg>
           </a>
         </div>
       </div>
+
+      <!-- spacer -->
       <div class="nbvl-search-bar-spacer"></div>
 
       <!-- action button -->
       <Link v-if="config.hasOwnProperty('actionButton')" :href="config.actionButton.link" :inertia-links="inertiaLinks">
-        <div class="nbvl-action-button">{{ config.actionButton.label }}</div>
+        <div class="nbvl-action-button">
+          <span>
+            {{ config.actionButton.label }}
+          </span>
+        </div>
       </Link>
+
     </div>
+    <!-- END: search box, clear search, and action button -->
 
     <!-- table -->
     <table class="nbvl-table">

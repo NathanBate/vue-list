@@ -13,6 +13,7 @@ div.nbvl-craft-theme > div > div.nbvl-search-wrapper::before {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='20' width='20' viewBox='0 0 48 48' style='fill:gray;'%3E%3Cpath d='M39.8 42.3 26.55 29.1Q25.1 30.35 23.1 31.05Q21.1 31.75 18.85 31.75Q13.35 31.75 9.525 27.95Q5.7 24.15 5.7 18.75Q5.7 13.35 9.525 9.55Q13.35 5.75 18.75 5.75Q24.15 5.75 27.95 9.55Q31.75 13.35 31.75 18.75Q31.75 20.9 31.05 22.9Q30.35 24.9 29 26.65L42.3 39.8ZM18.8 28.35Q22.75 28.35 25.525 25.525Q28.3 22.7 28.3 18.75Q28.3 14.8 25.525 11.975Q22.75 9.15 18.8 9.15Q14.75 9.15 11.95 11.975Q9.15 14.8 9.15 18.75Q9.15 22.7 11.95 25.525Q14.75 28.35 18.8 28.35Z'/%3E%3C/svg%3E");
 }
 
+/* Search Box Input */
 div.nbvl-craft-theme > div > div > input.nbvl-search-box {
     border-radius: 0.25rem;
     margin-right: 0.75rem;
@@ -24,6 +25,7 @@ div.nbvl-craft-theme > div > div > input.nbvl-search-box {
     line-height: 20px;
     box-sizing: border-box;
     width: 100%;
+    height:34px;
     background-color: #fbfcfe;
     color: #394b60;
 }
@@ -42,15 +44,22 @@ div.nbvl-craft-theme div a {
     text-decoration: none;
 }
 
+/* Action Button */
 div.nbvl-craft-theme div a .nbvl-action-button {
+    display: flex;
+    align-items: center;
+    height: 34px;
+    padding-right: 1rem;
+    padding-left: 1rem;
     color:white;
     border-radius: .25rem;
     text-decoration: none;
     font-family: sans-serif;
     font-weight: lighter;
+    font-size: 14px;
     cursor: pointer;
-    padding: .5rem 1rem .5rem 1rem;
     background-color: #E12D39;
+    white-space: nowrap;
 }
 
 div.nbvl-craft-theme div a .nbvl-action-button:hover {
