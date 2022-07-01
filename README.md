@@ -51,7 +51,7 @@ be used here. If you don't want to use a target, just remove the key from the co
 
 If you don't want an action button, just omit this from the config.
 
-```json
+```
 actionButton: {
         label: 'New User',
         link: 'https://example.com/user/add'
@@ -65,7 +65,7 @@ what the column label will be. The `key` property specifies what
 the key name is in the row data. And, the `search` property 
 specifies if this column should be included in the search criteria.
 
-```json
+```
 {
     label: "Name",
     key: "name", 
