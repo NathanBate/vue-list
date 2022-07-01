@@ -14,6 +14,8 @@ npm i @nathanbate/vue-list
 
 ## Config Options
 
+See the [demo config](/src/demo/config.js) and the [demo data](/src/demo/data.js)
+
 ### showList
 
 `true`: the table of results with always show
