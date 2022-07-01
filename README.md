@@ -1,7 +1,7 @@
 # @nathanbate/vue-list
 
-In custom code apps, I need to use lists all the time. So, I 
-decided to write a reusable vue component in vue.
+When I write custom web apps, I need to use lists all the time. So, I 
+decided to write a reusable vue component.
 
 ![A Picture of a Demo of vue-list](DemoImage.png "Demo")
 *Vue-List with demo data*
