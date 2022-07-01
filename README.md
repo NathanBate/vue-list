@@ -41,8 +41,8 @@ Does the row link to something? If so, it will look for the `link` property on t
 
 ### inertiaLinks
 
-`true`: uses [IntertiaJS](https://inertiajs.com) links so the page doesn't
-reload.
+`true`: uses [IntertiaJS](https://inertiajs.com) links in Inertia Apps so the page doesn't
+reload. Non-Inertia apps will not want to use this.
 
 ### rowLinkTarget
 
