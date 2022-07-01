@@ -1,6 +1,6 @@
 {
   "name": "@nathanbate/vue-list",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "a vuejs based searchable, pagination enabled list",
   "main": "src/App.vue",
   "repository": {
