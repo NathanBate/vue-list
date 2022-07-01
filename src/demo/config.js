@@ -3,7 +3,6 @@ export default {
     showHeading: true,
     itemsPerPage: 10,
     rowLinkable: true,
-    searchBar: true,
     inertiaLinks: false,
     rowLinkTarget: "_blank",
     actionButton: {

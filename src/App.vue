@@ -218,7 +218,7 @@ export default {
       }
 
       if (! this.config.hasOwnProperty("rowLinkTarget")) {
-        this.config.searchBar = false
+        this.config.rowLinkTarget = ""
       }
 
       this.config.columns.forEach((column, index, array) => {
