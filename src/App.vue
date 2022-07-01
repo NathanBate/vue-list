@@ -7,7 +7,7 @@
     <div style="display: flex;">
 
       <!-- search box -->
-      <div class="nbvl-search-wrapper" style="width:100%; padding-right:10px; position: relative;">
+      <div v-if="config.searchBar" class="nbvl-search-wrapper" style="width:100%; padding-right:10px; position: relative;">
         <input id="nbSearchBox" class="nbvl-search-box" :placeholder="isMac === true ? 'Search &#8984; + k' : 'Search CTRL + k'" type="text" v-model="searchPhrase" />
         <div class="nbvl-clear-search" style="display:flex">
           <div v-if="searchPhrase.length > 0 && isMobile === false" style="display: flex; align-items: center; font-size: 8pt; padding-right:4px; color:gray">
@@ -20,7 +20,7 @@
       </div>
 
       <!-- spacer -->
-      <div class="nbvl-search-bar-spacer"></div>
+      <div v-if="config.searchBar || config.hasOwnProperty('actionbutton')" class="nbvl-search-bar-spacer"></div>
 
       <!-- action button -->
       <Link v-if="config.hasOwnProperty('actionButton')" :href="config.actionButton.link" :inertia-links="inertiaLinks">
@@ -34,11 +34,11 @@
     </div>
     <!-- END: search box, clear search, and action button -->
 
-    <!-- table -->
-    <table class="nbvl-table">
+    <!-- Results Table -->
+    <table v-if="listShowing" class="nbvl-table">
 
       <!-- Table Heading -->
-      <thead>
+      <thead v-if="config.showHeading">
         <tr>
           <th
               class="nbvl-table-heading"
@@ -49,38 +49,41 @@
             {{ column.label }}
           </th>
         </tr>
-
       </thead>
-    <tbody>
-    <!-- Table Rows -->
-    <tr class="nbvl-table-rows" v-for="(item, rowIndex) in filteredItems" :key="'listItem-'+rowIndex">
-      <td v-for="(column, columnIndex) in config.columns" :key="'header-'+columnIndex">
-        <Link v-if="config.rowLinkable" class="nbvl-table-cell-link" :href="item.link" :target="config.hasOwnProperty('rowLinkTarget') ? config.rowLinkTarget : ''" :inertia-links="inertiaLinks">
-          <div style="padding: 14px; display: inline-block; width: 100%; color:black">
-            {{ item[ config.columns[columnIndex].key ] }}
-          </div>
-        </Link>
-        <div v-else>
-          {{ item[ config.columns[columnIndex].key ] }}
-        </div>
-      </td>
-    </tr>
+      <!-- END: Table Heading -->
 
-    <!-- Table Footer -->
-    <tr class="nbvl-table-footer" >
-      <td :colspan="config.columns.length">
-        <div class="nathanbate-list-pagination-buttons">
-          <a @click="pageIndex !== 1 ? pageIndex=1 : '' " :style="{'background-color':pageIndex !== 1 ? '#d8dde3' : '#f3f7fc'}">First</a>
-          <a @click="pageIndex !== 1 ? pageIndex=pageIndex-1 : ''" :style="{'background-color': pageIndex !== 1 ? '#d8dde3' : '#f3f7fc'}">Prev</a>
-          <span>{{ pageIndex }}</span>
-          <a @click="pageIndex !== numberOfPages ? pageIndex=pageIndex+1 :''" :style="{'background-color':pageIndex !== numberOfPages ? '#d8dde3' : '#f3f7fc'}">Next</a>
-          <a @click="pageIndex !== numberOfPages ? pageIndex=numberOfPages :''" :style="{'background-color': pageIndex !== numberOfPages ? '#d8dde3' : '#f3f7fc'}">Last</a>
-        </div>
-      </td>
-    </tr>
-    </tbody>
+      <tbody>
+        <!-- Table Rows -->
+        <tr class="nbvl-table-rows" v-for="(item, rowIndex) in filteredItems" :key="'listItem-'+rowIndex">
+          <td v-for="(column, columnIndex) in config.columns" :key="'header-'+columnIndex">
+            <Link v-if="config.rowLinkable" class="nbvl-table-cell-link" :href="item.link" :target="config.rowLinkTarget ? config.rowLinkTarget : ''" :inertia-links="inertiaLinks">
+              <div style="padding: 14px; display: inline-block; width: 100%; color:black">
+                {{ item[ config.columns[columnIndex].key ] }}
+              </div>
+            </Link>
+            <div v-else style="padding: 14px; display: inline-block; width: 100%; color:black">
+              {{ item[ config.columns[columnIndex].key ] }}
+            </div>
+          </td>
+        </tr>
 
+        <!-- Table Footer -->
+        <tr v-if="numberOfPages > 1" class="nbvl-table-footer" >
+          <td :colspan="config.columns.length">
+            <div class="nathanbate-list-pagination-buttons">
+              <a @click="pageIndex !== 1 ? pageIndex=1 : '' " :style="{'background-color':pageIndex !== 1 ? '#d8dde3' : '#f3f7fc'}">First</a>
+              <a @click="pageIndex !== 1 ? pageIndex=pageIndex-1 : ''" :style="{'background-color': pageIndex !== 1 ? '#d8dde3' : '#f3f7fc'}">Prev</a>
+              <span>{{ pageIndex }}</span>
+              <a @click="pageIndex !== numberOfPages ? pageIndex=pageIndex+1 :''" :style="{'background-color':pageIndex !== numberOfPages ? '#d8dde3' : '#f3f7fc'}">Next</a>
+              <a @click="pageIndex !== numberOfPages ? pageIndex=numberOfPages :''" :style="{'background-color': pageIndex !== numberOfPages ? '#d8dde3' : '#f3f7fc'}">Last</a>
+            </div>
+          </td>
+        </tr>
+        <!-- END: Table Footer -->
+
+      </tbody>
     </table>
+    <!-- END: Results Table -->
   </div>
 </template>
 
@@ -129,7 +132,21 @@ export default {
       } // if this.searchPhrase.length
     }, // filteredItems
     numberOfPages() {
-      return Math.ceil(this.data.length / this.config.itemsPerPage)
+      if (this.config.itemsPerPage == 0) {
+        return 1
+      } else {
+        return Math.ceil(this.data.length / this.config.itemsPerPage)
+      }
+    },
+    listShowing() {
+      if (this.config.showList === true) {
+        return true
+      }
+      if ((this.config.showList === false) && (this.searchPhrase.length > 3)) {
+        return true
+      } else {
+        return false
+      }
     },
     usingInertiaLinks() {
       return this.inertiaLinks
@@ -188,6 +205,22 @@ export default {
         this.inertiaLinks = this.config.inertiaLinks
       }
 
+      if (! this.config.hasOwnProperty("showHeading")) {
+        this.config.showHeading = true
+      }
+
+      if (! this.config.hasOwnProperty("showList")) {
+        this.config.showList = true
+      }
+
+      if (! this.config.hasOwnProperty("searchBar")) {
+        this.config.searchBar = true
+      }
+
+      if (! this.config.hasOwnProperty("rowLinkTarget")) {
+        this.config.searchBar = false
+      }
+
       this.config.columns.forEach((column, index, array) => {
         if (! column.hasOwnProperty("search")) {
           this.config.columns[index].search = false
@@ -198,6 +231,7 @@ export default {
         if (! column.hasOwnProperty("link")) {
           this.config.columns[index].link = false
         }
+
       })
     },
   },

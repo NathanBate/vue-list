@@ -1,8 +1,11 @@
 export default {
     showList: true,
+    showHeading: true,
     itemsPerPage: 10,
     rowLinkable: true,
+    searchBar: true,
     inertiaLinks: false,
+    rowLinkTarget: "_blank",
     actionButton: {
         label: 'New',
         link: 'https://inertiajs.com'
@@ -10,7 +13,6 @@ export default {
     columns: [
         {
             label: "Name",
-            link: true,
             key: "name",
             search: true,
         },
@@ -21,7 +23,6 @@ export default {
         },
         {
             label: "Random Number",
-            link: true,
             key: "randomNumber",
             search: true,
         }
