@@ -88,6 +88,7 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import DemoData from "./demo/data";
 import DemoConfig from "./demo/config";
 import { detectMobile } from "vue-mobile-detection/src/components/VueMobileDetection.js"
@@ -151,10 +152,12 @@ export default {
     usingInertiaLinks() {
       return this.inertiaLinks
     },
+    data() {
+      return this.dataProp === null ? DemoData : this.dataProp
+    }
   },
   data() {
     return {
-      data: null,
       config: null,
       isMobile: detectMobile(),
       searchPhrase: '',
@@ -237,7 +240,7 @@ export default {
   },
   created() {
     this.configProp === null ? this.config = DemoConfig : this.config = this.configProp
-    this.dataProp === null ? this.data = DemoData : this.data = this.dataProp
+    //this.dataProp === null ? this.data = this.data = ref(DemoData) : this.data = ref(this.dataProp)
     this.initConfig()
 
     /**
