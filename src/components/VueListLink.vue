@@ -1,5 +1,6 @@
 <template>
   <InertiaLink v-if="inertiaLinks === true" :href="href"><!-- inertia link --><slot/></InertiaLink>
+	<a v-else-if="href===''"><slot/></a>
   <a v-else :href="href"><slot/></a>
 </template>
 
@@ -9,8 +10,8 @@ import { Link } from '@inertiajs/inertia-vue3'
 export default {
   props: {
     href: {
-      required: true,
-      type: String
+      type: String,
+			default: '',
     },
     inertiaLinks: {
       required: false,

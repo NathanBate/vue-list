@@ -16,6 +16,12 @@ export default {
             search: true,
         },
         {
+            label: "Action Button Example",
+            button: true,
+            key: "buttonExample",
+            search: false,
+        },
+        {
             label: "Type",
             key: "type",
             search: true,
@@ -24,6 +30,7 @@ export default {
             label: "Random Number",
             key: "randomNumber",
             search: true,
-        }
+        },
+
     ]
 }

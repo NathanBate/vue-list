@@ -4,12 +4,24 @@ export default [
         link: "https://google.com",
         type: "Search Engine",
         randomNumber: Math.random(),
+        buttonExample: {
+            label: 'Go to Google',
+            link: 'https://google.com',
+            /* cannot use target when you are using a button confirm box callback */
+            confirmText: "Are you sure to want to visit Google? It could be too much for you to handle!!",
+        },
+
     },
     {
         name: "Bing",
         link: "https://bing.com",
         type: "Search Engine",
         randomNumber: Math.random(),
+        buttonExample: {
+            label: 'Bing!',
+            link: "https://bing.com",
+            target: "_BLANK"
+        },
     },
     {
         name: "Laravel",

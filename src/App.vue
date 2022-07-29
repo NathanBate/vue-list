@@ -53,19 +53,56 @@
       <!-- END: Table Heading -->
 
       <tbody>
+
         <!-- Table Rows -->
         <tr class="nbvl-table-rows" v-for="(item, rowIndex) in filteredItems" :key="'listItem-'+rowIndex">
           <td v-for="(column, columnIndex) in config.columns" :key="'header-'+columnIndex">
-            <Link v-if="config.rowLinkable" class="nbvl-table-cell-link" :href="item.link" :target="config.rowLinkTarget ? config.rowLinkTarget : ''" :inertia-links="inertiaLinks">
+
+						<!-- Is this cell a button? -->
+						<div v-if="column.hasOwnProperty('button') && item.hasOwnProperty(column.key)" style="display: inline-block">
+							<div v-if="column.button === true">
+
+								<Link
+										v-if="item[column.key].hasOwnProperty('confirmText')"
+										@click.prevent="$emit('vueListConfirm', item[column.key])"
+										:target="item[column.key].hasOwnProperty('target') ? item[column.key].target : ''">
+									<div class="nbvl-action-button" style="display: flex; flex-direction: column; justify-content: center;">
+									<span>
+										{{ item[column.key].label }}
+									</span>
+									</div>
+								</Link>
+
+								<Link
+										v-else
+										:href="item[column.key].link"
+										:inertia-links="inertiaLinks"
+										:target="item[column.key].hasOwnProperty('target') ? item[column.key].target : ''">
+									<div class="nbvl-action-button" style="display: flex; flex-direction: column; justify-content: center;">
+
+
+										<span>
+											{{ item[column.key].label }}
+										</span>
+									</div>
+								</Link>
+							</div>
+						</div>
+
+						<!-- is this cell linkable? -->
+            <Link v-else-if="config.rowLinkable" class="nbvl-table-cell-link" :href="item.link" :target="config.rowLinkTarget ? config.rowLinkTarget : ''" :inertia-links="inertiaLinks">
               <div style="padding: 14px; display: inline-block; width: 100%; color:black">
                 {{ item[ config.columns[columnIndex].key ] }}
               </div>
             </Link>
+
+						<!-- This is NOT a linkable cell -->
             <div v-else style="padding: 14px; display: inline-block; width: 100%; color:black">
               {{ item[ config.columns[columnIndex].key ] }}
             </div>
+
           </td>
-        </tr>
+        </tr><!-- END: Table Rows -->
 
         <!-- Table Footer -->
         <tr v-if="numberOfPages > 1" class="nbvl-table-footer" >
@@ -95,13 +132,14 @@ import { detectMobile } from "vue-mobile-detection/src/components/VueMobileDetec
 import VueListLink from "./components/VueListLink.vue";
 
 export default {
+	name: "VueList",
   props: {
-    configProp: {
+    listConfig: {
       type: Object,
       required: false,
       default: null,
     },
-    dataProp: {
+    listData: {
       type: Array,
       required: false,
       default: null
@@ -110,7 +148,7 @@ export default {
       type: String,
       required: false,
       default: 'nbvl-craft-theme',
-    }
+    },
   },
   components: {
     Link : VueListLink
@@ -153,11 +191,12 @@ export default {
       return this.inertiaLinks
     },
     data() {
-      return this.dataProp === null ? DemoData : this.dataProp
+      return this.listData === null ? DemoData : this.listData
     }
   },
   data() {
     return {
+			confirmText: '',
       config: null,
       isMobile: detectMobile(),
       searchPhrase: '',
@@ -239,8 +278,8 @@ export default {
     },
   },
   created() {
-    this.configProp === null ? this.config = DemoConfig : this.config = this.configProp
-    //this.dataProp === null ? this.data = this.data = ref(DemoData) : this.data = ref(this.dataProp)
+    this.listConfig === null ? this.config = DemoConfig : this.config = this.listConfig
+    //this.listData === null ? this.data = this.data = ref(DemoData) : this.data = ref(this.listData)
     this.initConfig()
 
     /**
