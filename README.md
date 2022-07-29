@@ -67,6 +67,8 @@ what the column label will be. The `key` property specifies what
 the key name is in the row data. And, the `search` property 
 specifies if this column should be included in the search criteria.
 
+#### Cell without Action Button
+
 ```
 {
     label: "Name",
@@ -75,14 +77,55 @@ specifies if this column should be included in the search criteria.
 },
 ```
 
+#### Cell with action button
+
+```
+{
+    label: "Action Button Example",
+    button: true,
+    key: "buttonExample",
+    search: false,
+},
+```
+
+#### Array of Objects with Column Config
+
+```
+    columns: [
+        {
+            label: "Name",
+            key: "name",
+            search: true,
+        },
+        {
+            label: "Action Button Example",
+            button: true,
+            key: "buttonExample",
+            search: false,
+        },
+        {
+            label: "Type",
+            key: "type",
+            search: true,
+        },
+        {
+            label: "Random Number",
+            key: "randomNumber",
+            search: true,
+        },
+
+    ]
+```
+
+
 ## Implementation
 
-If you want to see it work in demo mode, just omit the config-prop and/or the 
-data-prop.
+If you want to see it work in demo mode, just omit the list-config and/or the 
+list-data props.
 
 ```
 <template>
-    <List :config-prop="vueListConfig" :data-prop="listData"/>
+    <List :list-config="vueListConfig" :list-data="listData"/>
 </template>
 
 <script>
