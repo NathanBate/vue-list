@@ -1,7 +1,7 @@
 
 <template>
   <!-- wrapper -->
-  <div class="nbvl-wrapper" :class="theme">
+  <div class="nbvl-wrapper" :class="theme" style="position: relative;">
 
     <!-- search box, clear search, and action button -->
     <div style="display: flex;">
