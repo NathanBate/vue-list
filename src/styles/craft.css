@@ -15,6 +15,7 @@ div.nbvl-craft-theme > div > div.nbvl-search-wrapper::before {
 
 /* Search Box Input */
 div.nbvl-craft-theme > div > div > input.nbvl-search-box {
+    position:inherit;
     border-radius: 0.25rem;
     margin-right: 0.75rem;
     background-clip: border-box;

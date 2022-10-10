@@ -7,7 +7,7 @@
     <div style="display: flex;">
 
       <!-- search box -->
-      <div v-if="config.searchBar" class="nbvl-search-wrapper" style="width:100%; padding-right:10px; position: relative;">
+      <div v-if="config.searchBar" class="nbvl-search-wrapper" style="width:100%; position: inherit;" :class="{ searchBarPaddingRight : config.hasOwnProperty('actionButton') }">
         <input id="nbSearchBox" class="nbvl-search-box" :placeholder="isMac === true ? 'Search &#8984; + k' : 'Search CTRL + k'" type="text" v-model="searchPhrase" />
         <div class="nbvl-clear-search" style="display:flex">
           <div v-if="searchPhrase.length > 0 && isMobile === false" style="display: flex; align-items: center; font-size: 8pt; padding-right:4px; color:gray">
@@ -20,7 +20,7 @@
       </div>
 
       <!-- spacer -->
-      <div v-if="config.searchBar || config.hasOwnProperty('actionbutton')" class="nbvl-search-bar-spacer"></div>
+      <div v-if="config.searchBar || config.hasOwnProperty('actionButton')" class="nbvl-search-bar-spacer"></div>
 
       <!-- action button -->
       <Link v-if="config.hasOwnProperty('actionButton')" :href="config.actionButton.link" :inertia-links="inertiaLinks">
@@ -310,4 +310,7 @@ export default {
 <style scoped>
 @import "styles/craft.css";
 @import "styles/sunrise.css";
+div.searchBarPaddingRight {
+	padding-right: 10px;
+}
 </style>
