@@ -4,7 +4,7 @@
   <div class="nbvl-wrapper" :class="theme" style="position: relative;">
 
     <!-- search box, clear search, and action button -->
-    <div style="display: flex;">
+    <div style="display: flex; position:relative;">
 
       <!-- search box -->
       <div v-if="config.searchBar" class="nbvl-search-wrapper" style="width:100%; position: inherit;" :class="{ searchBarPaddingRight : config.hasOwnProperty('actionButton') }">
